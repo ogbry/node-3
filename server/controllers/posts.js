@@ -45,15 +45,25 @@ function postList(req, res) {
 
 function getSinglePost(req, res) {
   const db = req.app.get('db');
+  
+   db.posts
+   .find(req.params.userId)
+   .then(post => {
+       db.comments
+     .find(req.params.postId)
+     .then(comment => res.status(200).json({post,comment}))
+     .catch(err => {
+         console.error(err)
+         res.status(500).end()
+     })
+   })
+   .catch(err => {
+       console.log(err)
+       res.status(500).end()
+   })
 
-  db.posts
-    .findOne(req.params.id)
-    .then(posts => res.status(200).json(posts))
-    .catch(err => {
-      console.error(err);
-      res.status(500).end();
-    });
 }
+
 
 function updatePost(req, res) {
   const db = req.app.get('db')

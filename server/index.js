@@ -30,7 +30,7 @@ massive({
     app.get('/api/posts/user-:userId', posts.getUserPosts)
     app.post('/api/posts/create', posts.createPost);
     app.patch('/api/posts/update/:id', posts.updatePost)
-    app.get('/api/posts/:id', posts.getSinglePost);
+    app.get('/api/posts/:userId', posts.getSinglePost);
 
     //Comment
     app.get('/api/comments', comments.commentList)
