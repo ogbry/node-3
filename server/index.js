@@ -5,6 +5,10 @@ const users = require('./controllers/users.js');
 const posts = require('./controllers/posts.js');
 const comments = require('./controllers/comments.js');
 
+const secret = require('../secret.js');
+const user = require('./controllers/users.js');
+
+
 massive({
   host: 'localhost',
   port: 5432,
@@ -24,6 +28,8 @@ massive({
     app.get('/api/users', users.list);
     app.get('/api/users/:id', users.getById);
     app.get('/api/users/:id/profile', users.getProfile);
+    app.get('/api/protected/data', user.protected);
+    app.post('/api/users/login', user.login);
 
     //Post
     app.get('/api/posts', posts.postList)
